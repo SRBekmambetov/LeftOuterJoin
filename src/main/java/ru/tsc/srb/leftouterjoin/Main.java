@@ -1,0 +1,30 @@
+package ru.tsc.srb.leftouterjoin;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        if (args.length != 2) {
+            System.out.println("Некорректно введены параметры на вход");
+            return;
+        }
+
+        CreatingQueries creatingQueries = new CreatingQueries();
+
+        for (String fileTable: args) {
+            try {
+                creatingQueries.createTableFromFile(fileTable);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+        creatingQueries.printTablesFromFiles();
+        creatingQueries.printLeftJoinTable();
+    }
+}
